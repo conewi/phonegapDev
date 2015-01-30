@@ -18,22 +18,30 @@ and open the template in the editor.
                 &lt;access origin="*"/&gt;
             </pre> 
             <button type="button" onclick="Ajax()">Click Me!</button>
+            <p id="resposta"></p>
         </div>
 
         <script>
+
             function Ajax() {
+                $.support.cors = true;
+                jQuery.support.cors = true;
+                alert('in');
                 $.ajax({
                     url: "http://arduino.igori.webfactional.com/ajax.php",
                     type: "POST",
-                    data: {
-                        accion: "crossdomain",
-                        text: "text de prova"
-                    },
+                    dataType: 'jsonp', //use jsonp data type in order to perform cross domain ajax
+                    crossDomain: true, 
+                            data: {
+                                accion: "crossdomain",
+                                text: "text de prova"
+                            },
                     dataType: "json",
-                    success: onDataReceived
+                            success: onDataReceived
                 });
                 function onDataReceived(data) {
-                   alert(data['id']);
+                    alert('out');
+
                 }
             }
         </script>
