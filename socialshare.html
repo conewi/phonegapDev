@@ -9,7 +9,7 @@ and open the template in the editor.
         <title>SocialShare</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/cordova.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
         <script src="js/jquery.js"></script>
     </head>
     <body>
@@ -17,15 +17,21 @@ and open the template in the editor.
             SocialShare
         </h2>
         <div>
-            <button type="button" onclick="navigator.share('Estic compartin coses','Compartir')">Share Me!</button>
+            <button type="button" onclick="navigator.share('Estic compartin coses')">Share Me!</button>
         </div>
-          <h3>
-           Docu
+        <h3>
+            Docu
         </h3>
         <div>
             <p>config.xml</p>
             <pre class='brush: xml;'>
-                <strong> &lt;gap:plugin name="nl.madebymark.share" version="0.1.1" /&gt; </strong>
+    &lt;gap:plugin name="nl.madebymark.share" version="0.1.1" /&gt; 
+    &lt;feature name="Share" &gt;
+        &lt;param name="android-package" value="nl.madebymark.share.Share"/&gt;
+    &lt;/feature&gt;          
+    &lt;feature name="Share"&gt;
+        &lt;param name="ios-package" value="MMShare" /&gt; 
+    &lt;/feature&gt;    
             </pre> 
 
             <p>socailshare.html</p>
@@ -34,7 +40,7 @@ and open the template in the editor.
 &lt;button type="button" onclick="navigator.share('Estic compartin coses','Compartir')"&gt;Share Me!&lt;/button&gt;
             </pre> 
 
-            
+
 
         </div>
 

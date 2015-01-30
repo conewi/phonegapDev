@@ -2,7 +2,7 @@
 <widget id="phonegapdev.igorisoftware.com" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Phongap blog</name>
     <description>
-       Aplicació dev phongap
+        Aplicació dev phongap
     </description>
     <author email="info@igorisoftware.com" href="http://igorisoftware.com/">
         IgoriSoftware
@@ -26,7 +26,13 @@
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
     <preference name="SplashScreenDelay" value="0" />
-
+    
+    <feature name="Share" >
+        <param name="android-package" value="nl.madebymark.share.Share"/>
+    </feature>          
+    <feature name="Share">
+        <param name="ios-package" value="MMShare" /> 
+    </feature>    
     <gap:plugin name="nl.madebymark.share" />
     <access origin="*" />
 
