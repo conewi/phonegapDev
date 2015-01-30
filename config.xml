@@ -27,6 +27,7 @@
     <preference name="android-installLocation" value="auto" />
     <preference name="SplashScreenDelay" value="0" />
 
+    <gap:plugin name="nl.madebymark.share" />
     <access origin="*" />
 
 </widget>
