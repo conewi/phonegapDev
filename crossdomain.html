@@ -12,23 +12,27 @@ and open the template in the editor.
         <script src="js/jquery.js"></script>
     </head>
     <body>
+        <h2>
+            CrossDomain
+        </h2>
         <div>
-            <p>config.xml</p>
-            <pre class='brush: xml;'>
-                &lt;access origin="*"/&gt;
-            </pre> 
             <button type="button" onclick="Ajax()">Click Me!</button>
             <p id="resposta"></p>
         </div>
+          <h3>
+           Docu
+        </h3>
+        <div>
+            <p>config.xml</p>
+            <pre class='brush: xml;'>
+                <strong> &lt;access origin="*"/&gt; </strong>
+            </pre> 
 
-        <script>
-
-            function Ajax() {
+            <p>crossdomain.html</p>
+            <pre class='brush: xml;'>
+&lt;script&gt;
+          function Ajax() {
                 $.support.cors = true;
-                jQuery.support.cors = true;
-                jQuery.allowCrossDomainPages=true;
-                 $.allowCrossDomainPages = true;
-                alert('in');
                 $.ajax({
                     url: "http://arduino.igori.webfactional.com/ajax.php",
                     type: "POST",
@@ -38,10 +42,81 @@ and open the template in the editor.
                                 accion: "crossdomain",
                                 text: "text de prova"
                             },
-                            success: onDataReceived
+                            success: onDataReceived,
+                            error : onError
                 });
                 function onDataReceived(data) {
-                    alert('out');
+                 $('#resposta').text("la id és"+data['id']);
+                }
+                
+                function onError(data, error) {
+                 $('#resposta').text("Error! :"+error);
+                 console.log(data);
+                 
+                }
+            }
+&lt;script/&gt;
+            </pre> 
+
+            <p>ajax.php</p>
+            <pre class='brush: xml;'>
+&lt;?php
+<strong>header('content-type: application/json; charset=utf-8');</strong>
+include 'inc/class/Tool.php';
+include 'inc/class/cDB.php';
+include 'inc/adodb5/adodb.inc.php';
+include 'inc/adodb5/adodb-exceptions.inc.php';
+$accion = Tool::getValue('accion');
+switch ($accion) {
+    /* curs */
+    case 'crossdomain':
+        try {
+            $text = Tool::getValue('text');
+            cDB::getInstance()->Execute('INSERT into crossdomain (text) VALUES(?)', array($text));
+            $foo['id'] = cDB::getInstance()->Insert_ID();
+            $foo['success'] = true;
+           
+        } catch (Exception $e) {
+            $foo = array();
+            $foo['success'] = false;
+            $foo['error'] = $e;
+        }
+    <strong>echo $_GET['callback'] . '('.json_encode($foo).')';</strong>
+       
+        
+        break;
+    default:
+        echo 'No accion';
+        break;
+}
+?&gt;
+            </pre> 
+
+        </div>
+
+        <script>
+
+            function Ajax() {
+                $.support.cors = true;
+                $.ajax({
+                    url: "http://arduino.igori.webfactional.com/ajax.php",
+                    type: "POST",
+                    dataType: 'jsonp', //use jsonp data type in order to perform cross domain ajax
+                    crossDomain: true,
+                    data: {
+                        accion: "crossdomain",
+                        text: "text de prova"
+                    },
+                    success: onDataReceived,
+                    error: onError
+                });
+                function onDataReceived(data) {
+                    $('#resposta').text("la id és" + data['id']);
+                }
+
+                function onError(data, error) {
+                    $('#resposta').text("Error! :" + error);
+                    console.log(data);
 
                 }
             }
