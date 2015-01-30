@@ -26,6 +26,8 @@ and open the template in the editor.
             function Ajax() {
                 $.support.cors = true;
                 jQuery.support.cors = true;
+                jQuery.allowCrossDomainPages=true;
+                 $.allowCrossDomainPages = true;
                 alert('in');
                 $.ajax({
                     url: "http://arduino.igori.webfactional.com/ajax.php",
@@ -36,7 +38,6 @@ and open the template in the editor.
                                 accion: "crossdomain",
                                 text: "text de prova"
                             },
-                    dataType: "json",
                             success: onDataReceived
                 });
                 function onDataReceived(data) {
