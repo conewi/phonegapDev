@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>CrossDomain</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="js/jquery.js"></script>
+    </head>
+    <body>
+        <div>
+            <p>config.xml</p>
+            <pre class='brush: xml;'>
+                &lt;access origin="*"/&gt;
+            </pre> 
+            <button type="button" onclick="Ajax()">Click Me!</button>
+        </div>
+
+        <script>
+            function Ajax() {
+                $.ajax({
+                    url: "http://arduino.igori.webfactional.com/ajax.php",
+                    type: "POST",
+                    data: {
+                        accion: "crossdomain",
+                        text: "text de prova"
+                    },
+                    dataType: "json",
+                    success: onDataReceived
+                });
+                function onDataReceived(data) {
+                   alert(data['id']);
+                }
+            }
+        </script>
+    </body>
+</html>
