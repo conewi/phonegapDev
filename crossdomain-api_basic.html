@@ -16,15 +16,14 @@ and open the template in the editor.
             CrossDomain
         </h2>
         <div>
-            <button type="button" onclick="AjaxLogin()">Click Me!</button>
+            <button type="button" onclick="Ajax()">Click Me!</button>
             <p id="resposta"></p>
         </div>
         <script>
-var Token;
-           function AjaxPeticio() {
+
+           function Ajax() {
                 $.support.cors = true;
                 $.ajax({
-                    beforeSend: function(xhr){xhr.setRequestHeader('Accept', 'application/json');xhr.setRequestHeader('Authorization', 'Bearer '+Token);},
                     url: "http://api.llibre.com/prova",
                     type: "GET",
                     dataType: 'json', //use jsonp data type in order to perform cross domain ajax
@@ -34,38 +33,10 @@ var Token;
                 });
                 function onDataReceived(data) {
                  for (x in data) {
-                     alert(data[x]);
+                     alert(data[x]['text']);
+                     console.log(x);
                  }
                  console.log(data);
-                }
-                
-                function onError(data, error) {
-                 $('#resposta').text("Error! :"+error);     
-                  console.log(data);
-                }
-            }
-			   function AjaxLogin() {
-                $.support.cors = true;
-                $.ajax({
-                    url: "http://api.llibre.com/oauth",
-                    type: "POST",
-					data: {
-                        client_id: "app",
-                        grant_type: "password",
-						username: "uri",
-						password: "test"
-						
-                    },
-                    dataType: 'json', //use jsonp data type in order to perform cross domain ajax
-                    crossDomain: true, 
-                            success: onDataReceived,
-                            error : onError
-                });
-                function onDataReceived(data) {
-                     alert(data['access_token']);
-					 Token=data['access_token'];
-                 console.log(data);
-				 AjaxPeticio();
                 }
                 
                 function onError(data, error) {

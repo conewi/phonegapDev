@@ -10,56 +10,22 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="local-notification.js"></script>
+        <script type="text/javascript" src="js/local-notification.js"></script>
         <script src="js/jquery.js"></script>
     </head>
     <body>
         <h2>
             Notification
         </h2>
-        <div>
-            <button type="button" onclick="noti()">Notification in 60 seconds</button>
-        </div>
+
         <h3>
             Docu
         </h3>
-        <div>
-            <p>config.xml</p>
-            <pre class='brush: xml;'>
-    &lt;gap:plugin name="de.appplant.cordova.plugin.local-notification" /&gt;
-            </pre> 
-
-            <p>socailshare.html</p>
-            <pre class='brush: xml;'>
-&lt;script&gt;
-var now                  = new Date().getTime(),
-    _60_seconds_from_now = new Date(now + 60*1000);
-
-window.plugin.notification.local.add({
-    id:      1,
-    title:   'Reminder',
-    message: 'Dont forget to buy some flowers.',
-    repeat:  'weekly',
-    date:    _60_seconds_from_now
-});
-&lt;/script&gt;
-            </pre> 
-
-
-
-        </div>
         <script>
-            noti(){
-                var now = new Date().getTime(),
-                        _60_seconds_from_now = new Date(now + 60 * 1000);
 
-                window.plugin.notification.local.add({
-                    id: 1,
-                    title: 'Reminder',
-                    message: 'Dont forget to buy some flowers.',
-                    repeat: 'weekly',
-                    date: _60_seconds_from_now
-                });
+            document.addEventListener('deviceready', function () {
+                window.plugin.notification.local.add({message: 'Great app!'});
+            }, false);
             }
 
         </script>
